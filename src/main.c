@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:20 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/08 21:09:19 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/08 22:07:48 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int	main(int	argc, char** argv)
 {
 	if(argc != 2)
 		exit (1);
-	ft_checkmap();
+	ft_checkmap(argv[1]);
 	/* Initialize struct*/
 }
