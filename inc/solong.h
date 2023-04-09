@@ -6,12 +6,12 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/09 09:34:47 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/09 10:01:15 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef SOLONG_H
+# define SOLONG_H
 
 # include <fcntl.h>
 # include <sys/stat.h>
@@ -26,12 +26,31 @@
 # include <mlx.h>
 # include "../libft/libft.h"
 
+/**
+ * @brief Data structure containing all data of the game
+ * @param fd FileDescriptor for map (.ber extension) file
+ */
 typedef struct s_data
 {
-	int		FILLL;
+	int		fd;
 }	t_data;
 
-void    ft_checkmap(char *str);
-void    ft_exit(char	*str, int i);
+/**
+ * @brief Given a str, this function will check if the map have a .ber
+ * extension, if the file is possible to be open.
+ * 
+ * @param str Map file  
+ * @return This function does not return 
+ */
+void	ft_checkmap(char *str, t_data *data);
+
+/**
+ * @brief Exit properly with a error message and error code.
+ * 
+ * @param str Custom error message: "Error\\n str"
+ * @param i Error code
+ * @return This function does not return 
+ */
+void	ft_exit(char	*str, int i, t_data *data);
 
 #endif
