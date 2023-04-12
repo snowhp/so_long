@@ -6,13 +6,14 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:23:22 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/09 10:24:54 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:19:43 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/solong.h"
+#include "../../inc/solong.h"
 
 void  ft_init_data(t_data *data)
 {
-      data->fd = NULL;
+      data->fd = 0;
+      data->map = NULL;
 }

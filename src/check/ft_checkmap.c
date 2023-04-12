@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/12 15:24:23 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:19:08 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,29 @@ void	ft_checkfile(char *str, t_data *data)
 	
 	i = ft_strlen(str) - 4;
 	if (ft_strncmp(".ber", (str + i), 4) != 0)
-		ft_exit("Wrong extension of the file.", EXIT_FAILURE, &data);
+		ft_exit("Wrong extension of the file.", EXIT_FAILURE, data);
 	data->fd = open(str, O_RDONLY, 0444);
 	if (data->fd == -1)
-		ft_exit("Unable to open the map file.", EXIT_FAILURE, &data);
+		ft_exit("Unable to open the map file.", EXIT_FAILURE, data);
+}
+
+void	ft_loadmap(t_data *data)
+{
+	char*		temp;
+	size_t		len;/* String lenght size*/
+	int		y;/*arr[y][]*/
+
+	data->map = (char**)malloc(sizeof(char**));
+	if(!data->map)
+		ft_exit("Failed to allocate memory.", EXIT_FAILURE, data);
+	y = 0;
+	while((temp = get_next_line(data->fd)))
+	{
+		len = ft_strlen(temp);
+		if(y > 0 && len != ft_strlen(data->map[y - 1]))
+			ft_exit("Wrong line alignment.", EXIT_FAILURE, data);
+		data->map[y++] = temp;
+		printf("%s", data->map[y-1]);
+	}
+	data->map[y] = 0;
 }
