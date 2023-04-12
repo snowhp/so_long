@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/09 10:25:41 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:02:23 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <X11/keysym.h>
 # include <mlx.h>
 # include "../libft/libft.h"
+# include "../get_next_line/get_next_line.h"
 
 /**
  * @brief Data structure containing all data of the game
