@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:10:17 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/12 16:14:50 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:26:57 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,12 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int chr)
+char	*ft_strchr(const char *s, int c)
 {
-	if (!str)
-		return (NULL);
-	while (*str)
-	{
-		if (*str == chr)
-			return (str);
-		str++;
-	}
-	if (chr == '\0')
-		return (str);
+	while (*s != '\0' && c != *s)
+		s++;
+	if (c == *s)
+		return ((char *)s);
 	return (0);
 }
 

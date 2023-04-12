@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/12 16:19:08 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:43:15 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ void	ft_loadmap(t_data *data)
 	y = 0;
 	while((temp = get_next_line(data->fd)))
 	{
-		len = ft_strlen(temp);
-		if(y > 0 && len != ft_strlen(data->map[y - 1]))
-			ft_exit("Wrong line alignment.", EXIT_FAILURE, data);
-		data->map[y++] = temp;
-		printf("%s", data->map[y-1]);
+		data->map[y++] = ft_strtrim(temp, "\n");
+		free(temp);
+		printf("%s\n", data->map[y-1]);// show the map
 	}
 	data->map[y] = 0;
 }
