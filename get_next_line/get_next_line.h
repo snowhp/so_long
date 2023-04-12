@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:10:22 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/12 15:05:53 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:15:48 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
@@ -32,8 +33,8 @@
  * @return Next line in the file or NULL.
  */
 char	*get_next_line(int fd);
-char	*ft_strchr(char *str, int chr);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strchr(const char *str, int chr);
+char	*ft_strjoin(const char *s1, const char *s2);
 void	*ft_calloc(size_t nmemb, size_t size);
-int		ft_strlen(char *str);
+size_t	ft_strlen(const char *str);
 #endif
