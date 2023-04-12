@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/12 15:02:23 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:24:09 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_data
  * @param str Map file  
  * @return This function does not return 
  */
-void	ft_checkmap(char *str, t_data *data);
+void	ft_checkfile(char *str, t_data *data);
 
 /**
  * @brief Exit properly with a error message and error code.
