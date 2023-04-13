@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/12 20:04:08 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:02:16 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,43 @@ void	ft_checkfile(char *str, t_data *data)
 		ft_exit("Unable to open the map file.", EXIT_FAILURE, data);
 }
 
-void	ft_loadmap(t_data *data)
+void	ft_loadmap(char *str, t_data *data)
 {
 	char*		temp;
 	int		y;
 
-	data->map = (char**)malloc(sizeof(char**));
+	y = 0;
+	while (1)
+	{
+		temp = get_next_line(data->fd);
+/* 		if(y == 0 && !temp)
+		{
+			ft_exit("Nothing to read in your file.", EXIT_FAILURE, data);
+			break ;
+		} Check to fix not reading empty files.*/
+		if (!temp)
+			break ;
+		free(temp);
+		data->max_y++;
+	}
+	free(temp);
+	close(data->fd);
+	data->fd = open(str, O_RDONLY, 0444);
+	data->map = (char**)malloc(sizeof(char*) * (data->max_y + 1));
 	if(!data->map)
 		ft_exit("Failed to allocate memory.", EXIT_FAILURE, data);
 	y = 0;
-	while((temp = get_next_line(data->fd)))
+	while(y <= data->max_y)
 	{
-		data->map[y++] = ft_strtrim(temp, "\n");
+		temp = get_next_line(data->fd);
+		if(!temp)
+			break ;
+		data->map[y] = ft_strtrim(temp, "\n");
 		free(temp);
-		printf("%s\n", data->map[y-1]);// show the map
+		y++;
+		//printf("%s\n", data->map[y-1]);// show the map
 	}
-	data->max_y = y - 1;
+	free(temp);
 	data->map[y] = 0;
 }
 
@@ -48,11 +69,13 @@ void ft_checkmap(t_data *data)
 	size_t		size;
 	int		x;
 	int		y;
-	int		charE;
-	int		charP;
+	unsigned int		charE;
+	unsigned int		charP;
 
 	/* Line size*/
 	x = 0;
+	charE = 0;
+	charP = 0;
 	size = ft_strlen(data->map[x]);
 	data->max_x = (int) size;
 	while(data->map[++x])
@@ -67,14 +90,14 @@ void ft_checkmap(t_data *data)
 		if (data->map[0][x++] != '1')
 			ft_exit("The first line is not a wall", EXIT_FAILURE, data);
 	}
-	if (ft_memcmp(data->map[0], data->map[data->max_y], sizeof(data->map[0])) != 0)
+	if (ft_memcmp(data->map[0], data->map[(data->max_y - 1)], sizeof(data->map[0] != 0)))
 		ft_exit("The last line is not a wall", EXIT_FAILURE, data);
 	/* Check content and forbiden things*/
 	y = 1;
 	x = 0;
-	while (data->map[y][x] && y < data->max_y)
+	while (data->map[y] && y < data->max_y)
 	{
-		if((x == 0 || y == data->max_y) && data->map[y][x] != '1')
+		if((x == 0 || y == (data->max_y - 1)) && data->map[y][x] != '1')
 			ft_exit("Unrecognized characters in your map file. Vertical Walls", EXIT_FAILURE, data);
 		if (data->map[y][x] == 'P')
 			charP++;
@@ -87,6 +110,8 @@ void ft_checkmap(t_data *data)
 		}
 		else
 			ft_exit("Unrecognized characters in your map file.", EXIT_FAILURE, data);
+		if(charP > 1 || charE > 1)
+			ft_exit("Too many Player's or Exit's", EXIT_FAILURE, data);
 		if(data->map[y][++x] == 0)
 		{
 			x = 0;
