@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/13 15:44:56 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/14 01:52:32 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_data
 	char**	map;
 	int		max_y;/* For a 5 line file this value will be 5, and acessible by map[]*/
 	int		max_x;
+	int		p_y;
+	int		p_x;
 	int		nb_col;
 }	t_data;
 
@@ -64,5 +66,8 @@ void	ft_exit(char	*str, int i, t_data *data);
 void  ft_init_data(t_data *data);
 void	ft_loadmap(char *str, t_data *data);
 void ft_checkmap(t_data *data);
+void	ft_mapflood(t_data *data);
+char **ft_flood(t_data *data, char **maptemp, int p_y , int p_x, int *ne, int *nc);
+void	ft_printarray(char **arr, t_data *data);
 
 #endif

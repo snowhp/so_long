@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 01:09:09 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:03:02 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	ft_checkfile(char *str, t_data *data)
 
 	i = ft_strlen(str) - 4;
 	if (ft_strncmp(".ber", (str + i), 4) != 0)
-		ft_exit("Wrong extension of the file.", EXIT_FAILURE, data);
+		ft_exit("Wrong extension of the file", EXIT_FAILURE, data);
 	data->fd = open(str, O_RDONLY, 0444);
 	if (data->fd == -1)
-		ft_exit("Unable to open the map file.", EXIT_FAILURE, data);
+		ft_exit("Unable to open the map file", EXIT_FAILURE, data);
 }
 
 void	ft_loadmap(char *str, t_data *data)
@@ -39,15 +39,15 @@ void	ft_loadmap(char *str, t_data *data)
 		data->max_y++;
 	}
 	if(!temp && data->max_y == 0)
-		ft_exit("File is empty.", EXIT_FAILURE, data);
+		ft_exit("File is empty", EXIT_FAILURE, data);
 	free(temp);
 	close(data->fd);
 	data->fd = open(str, O_RDONLY, 0444);
 	if (data->fd == -1)
-		ft_exit("Unable to open the map file.", EXIT_FAILURE, data);
+		ft_exit("Unable to open the map file", EXIT_FAILURE, data);
 	data->map = (char**)malloc(sizeof(char*) * (data->max_y + 1));
 	if(!data->map)
-		ft_exit("Failed to allocate memory.", EXIT_FAILURE, data);
+		ft_exit("Failed to allocate memory", EXIT_FAILURE, data);
 	y = 0;
 	while(y <= data->max_y)
 	{
@@ -99,25 +99,81 @@ void ft_checkmap(t_data *data)
 		if((x == 0 || x == data->max_x - 1) && data->map[y][x] != '1')
 			ft_exit("Unrecognized characters in your map file. Vertical Walls", EXIT_FAILURE, data);
 		if (data->map[y][x] == 'P')
+		{
+			data->p_y = y;
+			data->p_x = x;
 			charP++;
+		}
 		else if (data->map[y][x] == 'E')
 			charE++;
-		else if(data->map[y][x] == 'C')
+		else if (data->map[y][x] == 'C')
 			data->nb_col++;
 		else if (data->map[y][x] == '1' || data->map[y][x] == '0')
 		{
 		}
 		else
-			ft_exit("Unrecognized characters in your map file.", EXIT_FAILURE, data);
-		if(charP > 1 || charE > 1)
+			ft_exit("Unrecognized characters in your map file", EXIT_FAILURE, data);
+		if (charP > 1 || charE > 1)
 			ft_exit("Too many Player's or Exit's", EXIT_FAILURE, data);
-		if(data->map[y][++x] == 0)
+		if (data->map[y][++x] == 0)
 		{
 			x = 0;
 			y++;
 		}
 	}
-	if(data->nb_col == 0 || charE == 0 || charP == 0)
+	if (data->nb_col == 0 || charE == 0 || charP == 0)
 		ft_exit("Not characters enough on the map", EXIT_FAILURE, data);
-	/* ft_flood */
+	ft_mapflood(data);
+}
+
+void	ft_mapflood(t_data *data)
+{
+	int		ne;
+	int		nc;
+	char	**maptemp;
+
+	nc = data->nb_col;
+	ne = 1;
+	maptemp = data->map;
+	ft_flood(data, maptemp, (data->p_y) , data->p_x, &ne, &nc);
+	ft_printarray(maptemp, data);
+	if(nc != 0 || ne != 0)
+		ft_exit("A valid path for the player doesn't exist", EXIT_FAILURE, data);
+}
+
+char **ft_flood(t_data *data, char **maptemp, int p_y , int p_x, int *ne, int *nc)
+{
+	if(maptemp[p_y][p_x] == '1')
+		return(maptemp);
+	if(maptemp[p_y][p_x] == 'P' || maptemp[p_y][p_x] == 'E' || maptemp[p_y][p_x] == 'C' || maptemp[p_y][p_x] == '0')
+	{
+		if(maptemp[p_y][p_x] == 'E')
+			(*ne)--;
+		else if(maptemp[p_y][p_x] == 'C')
+			(*nc)--;
+		maptemp[p_y][p_x] = 'X';
+		ft_flood(data, maptemp, (p_y + 1) , p_x, ne, nc);
+		ft_flood(data, maptemp, (p_y - 1) , p_x, ne, nc);
+		ft_flood(data, maptemp, p_y , (p_x + 1), ne, nc);
+		ft_flood(data, maptemp, p_y  , (p_x - 1), ne, nc);
+		return(maptemp);
+	}
+	return(maptemp);
+}
+
+void	ft_printarray(char **arr, t_data *data)
+{
+	int	y = 0;
+	int	x = 0;
+
+	while (arr[y] && y < data->max_y)
+	{
+		printf("%c", arr[y][x]);
+		if (arr[y][++x] == 0)
+		{
+			printf("\n");
+			x = 0;
+			y++;
+		}
+	}
 }
