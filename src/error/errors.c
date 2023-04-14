@@ -6,12 +6,11 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 09:31:38 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 01:05:09 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:58:42 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/solong.h"
-
 
 void	ft_exit(char	*str, int i, t_data *data)
 {
@@ -20,12 +19,15 @@ void	ft_exit(char	*str, int i, t_data *data)
 	/* free anymemory */
 	close(data->fd);/* Should be close after no longer needed prob ft_checkmap.c*/
 	y = 0;
-	if(data->map)
+	if (data->map)
 	{
 		while (data->map[y])
-			free(data->map[y++]);
-		if (data->map)
-			free(data->map);
+		{
+			free(data->map[y]);
+			y++;
+		}
+		free(data->map[++y]);
+		free(data->map);
 	}
 	if (i == EXIT_SUCCESS)
 		exit(EXIT_SUCCESS);

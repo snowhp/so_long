@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 02:03:02 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/14 03:05:28 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_checkfile(char *str, t_data *data)
 
 void	ft_loadmap(char *str, t_data *data)
 {
-	char*		temp;
+	char	*temp;
 	int		y;
 
 	y = 0;
@@ -38,38 +38,37 @@ void	ft_loadmap(char *str, t_data *data)
 		free(temp);
 		data->max_y++;
 	}
-	if(!temp && data->max_y == 0)
+	if (!temp && data->max_y == 0)
 		ft_exit("File is empty", EXIT_FAILURE, data);
 	free(temp);
 	close(data->fd);
 	data->fd = open(str, O_RDONLY, 0444);
 	if (data->fd == -1)
 		ft_exit("Unable to open the map file", EXIT_FAILURE, data);
-	data->map = (char**)malloc(sizeof(char*) * (data->max_y + 1));
-	if(!data->map)
+	data->map = (char **)malloc(sizeof(char *) * (data->max_y + 1));
+	if (!data->map)
 		ft_exit("Failed to allocate memory", EXIT_FAILURE, data);
 	y = 0;
-	while(y <= data->max_y)
+	while (y < data->max_y)
 	{
 		temp = get_next_line(data->fd);
-		if(!temp)
+		if (!temp)
 			break ;
 		data->map[y] = ft_strtrim(temp, "\n");
 		free(temp);
 		y++;
 		//printf("%s\n", data->map[y-1]);// show the map
 	}
-	free(temp);
 	data->map[y] = 0;
 }
 
-void ft_checkmap(t_data *data)
+void	ft_checkmap(t_data *data)
 {
-	size_t		size;
+	size_t	size;
 	int		x;
 	int		y;
-	unsigned int		charE;
-	unsigned int		charP;
+	unsigned int	charE;
+	unsigned int	charP;
 
 	/* Line size*/
 	x = 0;
@@ -77,7 +76,7 @@ void ft_checkmap(t_data *data)
 	charP = 0;
 	size = ft_strlen(data->map[x]);
 	data->max_x = (int) size;
-	while(data->map[++x])
+	while (data->map[++x])
 	{
 		if (size != ft_strlen(data->map[x]))
 			ft_exit("Map lines have different sizes", EXIT_FAILURE, data);
@@ -96,7 +95,7 @@ void ft_checkmap(t_data *data)
 	x = 0;
 	while (data->map[y] && y < data->max_y)
 	{
-		if((x == 0 || x == data->max_x - 1) && data->map[y][x] != '1')
+		if ((x == 0 || x == data->max_x - 1) && data->map[y][x] != '1')
 			ft_exit("Unrecognized characters in your map file. Vertical Walls", EXIT_FAILURE, data);
 		if (data->map[y][x] == 'P')
 		{
@@ -135,30 +134,33 @@ void	ft_mapflood(t_data *data)
 	nc = data->nb_col;
 	ne = 1;
 	maptemp = data->map;
-	ft_flood(data, maptemp, (data->p_y) , data->p_x, &ne, &nc);
+	ft_flood(data, maptemp, (data->p_y), data->p_x, &ne, &nc);
 	ft_printarray(maptemp, data);
-	if(nc != 0 || ne != 0)
+	if (nc != 0 || ne != 0)
 		ft_exit("A valid path for the player doesn't exist", EXIT_FAILURE, data);
 }
 
-char **ft_flood(t_data *data, char **maptemp, int p_y , int p_x, int *ne, int *nc)
+char	**ft_flood(t_data *data, char **maptemp, int p_y , int p_x, int *ne, int *nc)
 {
-	if(maptemp[p_y][p_x] == '1')
+	if (maptemp[p_y][p_x] == '1')
 		return(maptemp);
-	if(maptemp[p_y][p_x] == 'P' || maptemp[p_y][p_x] == 'E' || maptemp[p_y][p_x] == 'C' || maptemp[p_y][p_x] == '0')
+	else if (maptemp[p_y][p_x] == 'X')
 	{
-		if(maptemp[p_y][p_x] == 'E')
+	}
+	else
+	{
+		if (maptemp[p_y][p_x] == 'E')
 			(*ne)--;
-		else if(maptemp[p_y][p_x] == 'C')
+		else if (maptemp[p_y][p_x] == 'C')
 			(*nc)--;
 		maptemp[p_y][p_x] = 'X';
 		ft_flood(data, maptemp, (p_y + 1) , p_x, ne, nc);
 		ft_flood(data, maptemp, (p_y - 1) , p_x, ne, nc);
-		ft_flood(data, maptemp, p_y , (p_x + 1), ne, nc);
-		ft_flood(data, maptemp, p_y  , (p_x - 1), ne, nc);
-		return(maptemp);
+		ft_flood(data, maptemp, p_y, (p_x + 1), ne, nc);
+		ft_flood(data, maptemp, p_y, (p_x - 1), ne, nc);
+		return (maptemp);
 	}
-	return(maptemp);
+	return (maptemp);
 }
 
 void	ft_printarray(char **arr, t_data *data)
@@ -177,3 +179,4 @@ void	ft_printarray(char **arr, t_data *data)
 		}
 	}
 }
+
