@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/13 19:02:16 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/14 01:09:09 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,18 @@ void	ft_loadmap(char *str, t_data *data)
 	while (1)
 	{
 		temp = get_next_line(data->fd);
-/* 		if(y == 0 && !temp)
-		{
-			ft_exit("Nothing to read in your file.", EXIT_FAILURE, data);
-			break ;
-		} Check to fix not reading empty files.*/
 		if (!temp)
 			break ;
 		free(temp);
 		data->max_y++;
 	}
+	if(!temp && data->max_y == 0)
+		ft_exit("File is empty.", EXIT_FAILURE, data);
 	free(temp);
 	close(data->fd);
 	data->fd = open(str, O_RDONLY, 0444);
+	if (data->fd == -1)
+		ft_exit("Unable to open the map file.", EXIT_FAILURE, data);
 	data->map = (char**)malloc(sizeof(char*) * (data->max_y + 1));
 	if(!data->map)
 		ft_exit("Failed to allocate memory.", EXIT_FAILURE, data);
@@ -97,7 +96,7 @@ void ft_checkmap(t_data *data)
 	x = 0;
 	while (data->map[y] && y < data->max_y)
 	{
-		if((x == 0 || y == (data->max_y - 1)) && data->map[y][x] != '1')
+		if((x == 0 || x == data->max_x - 1) && data->map[y][x] != '1')
 			ft_exit("Unrecognized characters in your map file. Vertical Walls", EXIT_FAILURE, data);
 		if (data->map[y][x] == 'P')
 			charP++;
@@ -118,4 +117,7 @@ void ft_checkmap(t_data *data)
 			y++;
 		}
 	}
+	if(data->nb_col == 0 || charE == 0 || charP == 0)
+		ft_exit("Not characters enough on the map", EXIT_FAILURE, data);
+	/* ft_flood */
 }
