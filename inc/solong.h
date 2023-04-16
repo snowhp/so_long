@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 16:37:30 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:04:09 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ typedef struct s_data
 	int		nb_col;
 	void	*mlx_ptr;
 	void	*mlx_win;
+	void	*cimg;
+	void	*eimg;
+	void	*fimg;
+	void	*pimg;
+	void	*wimg;
 }	t_data;
 
 /**

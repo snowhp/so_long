@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:09:44 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 16:52:43 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:12:59 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,19 @@ void	ft_initgraph(t_data *data)
 		free(data->mlx_ptr);
 		ft_exit("Failed to create window.", EXIT_FAILURE, data);
 	}
+	ft_imageload(data, data->cimg, "textures/collectible.xpm");
+	ft_imageload(data, data->eimg, "textures/exit.xpm");
+	ft_imageload(data, data->fimg, "textures/floor.xpm");
+	ft_imageload(data, data->pimg, "textures/players.xpm");
+	ft_imageload(data, data->wimg, "textures/wall.xpm");
 	mlx_loop(data->mlx_ptr);
+}
+
+void	ft_imageload(t_data *data, void *imagep, char *path)
+{
+	imagep = mlx_xpm_file_to_image(imagep, path, 50, 50);
+	if(imagep == NULL)
+	{
+		ft_exit("Couldn't convert a image.", EXIT_FAILURE, data);
+	}
 }
