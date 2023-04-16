@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 09:31:38 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 02:58:42 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:50:45 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_exit(char	*str, int i, t_data *data)
 	int		y;
 
 	/* free anymemory */
-	close(data->fd);/* Should be close after no longer needed prob ft_checkmap.c*/
 	y = 0;
 	if (data->map)
 	{

@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 03:05:28 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:50:39 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_loadmap(char *str, t_data *data)
 		y++;
 		//printf("%s\n", data->map[y-1]);// show the map
 	}
+	close(data->fd);
 	data->map[y] = 0;
 }
 
