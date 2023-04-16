@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:20 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 03:11:11 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:35:06 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		main(int	argc, char**	argv)
 	ft_checkfile(argv[1], &data);
 	ft_loadmap(argv[1], &data);
 	ft_checkmap(&data);
-	//ft_initgraph(&data);
+	ft_initgraph(&data);
 	ft_exit(NULL, EXIT_SUCCESS, &data);
 	/* Initialize struct*/
 }
