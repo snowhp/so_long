@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:09:44 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/16 21:12:59 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:43:54 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,32 @@ void	ft_initgraph(t_data *data)
 		free(data->mlx_ptr);
 		ft_exit("Failed to create window.", EXIT_FAILURE, data);
 	}
-	ft_imageload(data, data->cimg, "textures/collectible.xpm");
-	ft_imageload(data, data->eimg, "textures/exit.xpm");
-	ft_imageload(data, data->fimg, "textures/floor.xpm");
-	ft_imageload(data, data->pimg, "textures/players.xpm");
-	ft_imageload(data, data->wimg, "textures/wall.xpm");
+	data->cimg = ft_imageload(data, "textures/collectible.xpm");
+	data->eimg = ft_imageload(data, "textures/exit.xpm");
+	data->fimg = ft_imageload(data, "textures/floor.xpm");
+	data->pimg = ft_imageload(data, "textures/player.xpm");
+	data->wimg = ft_imageload(data, "textures/wall.xpm");
+	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, &ft_keyhandler, data);
 	mlx_loop(data->mlx_ptr);
 }
 
-void	ft_imageload(t_data *data, void *imagep, char *path)
+void	*ft_imageload(t_data *data, char *path)
 {
-	imagep = mlx_xpm_file_to_image(imagep, path, 50, 50);
-	if(imagep == NULL)
+	void	*imagep;
+
+	imagep = mlx_xpm_file_to_image(data->mlx_ptr, path, &data->size, &data->size);
+	if (imagep == NULL) /* Check what happens if a image have a invalid path. had segfault*/
 	{
+		printf("%s", path);
 		ft_exit("Couldn't convert a image.", EXIT_FAILURE, data);
 	}
+	else
+		return (imagep);
+}
+
+void	ft_keyhandler(int	keycode, t_data *data)
+{
+	if (keycode == XK_Escape)
+		ft_exit("Game finished by user", EXIT_SUCCESS, data);
+	/* ADD OTHER KEYS */
 }

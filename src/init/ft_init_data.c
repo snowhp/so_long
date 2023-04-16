@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 10:23:22 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/16 21:04:35 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:38:15 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	ft_init_data(t_data *data)
 	data->fimg = 0;
 	data->pimg = 0;
 	data->wimg = 0;
+	data->size = SIZE;
 }

@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/16 21:04:09 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/16 21:42:05 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_data
 	void	*fimg;
 	void	*pimg;
 	void	*wimg;
+	int		size;
 }	t_data;
 
 /**
@@ -79,5 +80,8 @@ void	ft_mapflood(t_data *data);
 char **ft_flood(t_data *data, char **maptemp, int p_y , int p_x, int *ne, int *nc);
 void	ft_printarray(char **arr, t_data *data);
 void	ft_initgraph(t_data *data);
+void	*ft_imageload(t_data *data, char *path);
+void	ft_keyhandler(int	keycode, t_data *data);
+
 
 #endif
