@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/17 11:29:34 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:32:17 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,9 @@ void	ft_initgraph(t_data *data);
 void	*ft_imageload(t_data *data, char *path);
 int		ft_keyhandler(int	keycode, t_data *data);
 void	ft_loadscreen(t_data *data);
+void	ft_moveup(t_data *data);
+void	ft_movedown(t_data *data);
+void	ft_moveleft(t_data *data);
+void	ft_moveright(t_data *data);
 
 #endif
