@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:20 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 16:35:06 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:05:52 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ int		main(int	argc, char**	argv)
 	ft_checkfile(argv[1], &data);
 	ft_loadmap(argv[1], &data);
 	ft_checkmap(&data);
+	if (data.map)
+	{
+		int y = 0;
+		while (data.map[y])
+		{
+			free(data.map[y]);
+			y++;
+		}
+		free(data.map[++y]);
+		free(data.map);
+	}
+	ft_loadmap(argv[1], &data);
 	ft_initgraph(&data);
 	ft_exit(NULL, EXIT_SUCCESS, &data);
 	/* Initialize struct*/
