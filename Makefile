@@ -6,7 +6,7 @@
 #    By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 16:21:48 by tde-sous          #+#    #+#              #
-#    Updated: 2023/04/14 16:41:58 by tde-sous         ###   ########.fr        #
+#    Updated: 2023/04/17 11:35:21 by tde-sous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,10 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(LIBFT_LIB) $(OBJS) $(MLX)
-	$(CC) -Wall -Wextra -Werror $(OBJS) $(LIBFT_LIB) $(MLXDIR)$(MLX) $(OTHER) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT_LIB) $(MLXDIR)$(MLX) $(OTHER) -o $(NAME)
 
 debug: $(OBJS) $(LIBFT_LIB)
-	$(CC) $(FLAGS) -g $(SRCS) $(LIBFT_LIB) -o $(NAME)
+	$(CC) $(FLAGS) -g $(SRCS) $(LIBFT_LIB) $(MLXDIR)$(MLX) $(OTHER) -o $(NAME)
 
 $(MLX):
 			cd $(MLXDIR) && $(MAKE)
