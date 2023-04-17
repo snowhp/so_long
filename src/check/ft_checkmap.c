@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/14 16:50:39 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:00:54 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_loadmap(char *str, t_data *data)
 		temp = get_next_line(data->fd);
 		if (!temp)
 			break ;
-		data->map[y] = ft_strtrim(temp, "\n");
+		data->map[y] = ft_strtrim(temp, "\n");/* Check for \0*/
 		free(temp);
 		y++;
 		//printf("%s\n", data->map[y-1]);// show the map
