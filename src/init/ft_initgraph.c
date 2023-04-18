@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:09:44 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 10:49:09 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:52:05 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,19 @@ void	ft_loadscreen(t_data *data)
 
 	y = 0;
 	x = 0;
-	while(data->map[y])
+	while (data->map[y])
 	{
-		while(data->map[y][x])
+		while (data->map[y][x])
 		{
-			if(data->map[y][x] == 'C')
+			if (data->map[y][x] == 'C')
 				mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->cimg, x * SIZE, y * SIZE);
-			else if(data->map[y][x] == 'E')
+			else if (data->map[y][x] == 'E')
 				mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->eimg, x * SIZE, y * SIZE);
-			else if(data->map[y][x] == '0')
+			else if (data->map[y][x] == '0')
 				mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, x * SIZE, y * SIZE);
-			else if(data->map[y][x] == 'P')
+			else if (data->map[y][x] == 'P')
 				mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, x * SIZE, y * SIZE);
-			else if(data->map[y][x] == '1')
+			else if (data->map[y][x] == '1')
 				mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->wimg, x * SIZE, y * SIZE);
 			x++;
 		}
@@ -77,9 +77,6 @@ void	*ft_imageload(t_data *data, char *path)/* https://github.com/S-LucasSerrano
 
 int	ft_keyhandler(int	keycode, t_data *data)
 {
-	int		moves;
-
-	moves = 0;
 	if (keycode == XK_Escape)
 		ft_exit(NULL, EXIT_SUCCESS, data);
 	else if (keycode == XK_w)
@@ -90,13 +87,13 @@ int	ft_keyhandler(int	keycode, t_data *data)
 		ft_moveleft(data);
 	else if (keycode == XK_d)
 		ft_moveright(data);
-	if(data->pwexit == 1 && (data->p_x != data->e_x || data->p_y != data->e_y))
+	if (data->pwexit == 1 && (data->p_x != data->e_x || data->p_y != data->e_y))
 	{
 		printf("COORDS %i %i\n", data->e_x, data->e_y);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->eimg, data->e_x * SIZE, data->e_y * SIZE);
 		data->pwexit = 0;
 	}
-	if(data->e_x == data->p_x && data->e_y == data->p_y && data->nb_col > 0)
+	if (data->e_x == data->p_x && data->e_y == data->p_y && data->nb_col > 0)
 		data->pwexit = 1;
 	/* ADD OTHER KEYS */
 	return (0);
@@ -141,7 +138,7 @@ void	ft_movedown(t_data *data)
 		ft_printf("Game as finished! Congratulations\n");
 		ft_exit(NULL, EXIT_SUCCESS, data);
 	}
-	if(data->map[data->p_y + 1][data->p_x] != '1')
+	if (data->map[data->p_y + 1][data->p_x] != '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_y++;
@@ -165,7 +162,7 @@ void	ft_moveleft(t_data *data)
 		ft_printf("Game as finished! Congratulations\n");
 		ft_exit(NULL, EXIT_SUCCESS, data);
 	}
-	if(data->map[data->p_y][data->p_x - 1] != '1')
+	if (data->map[data->p_y][data->p_x - 1] != '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_x--;
@@ -189,7 +186,7 @@ void	ft_moveright(t_data *data)
 		ft_printf("Game as finished! Congratulations\n");
 		ft_exit(NULL, EXIT_SUCCESS, data);
 	}
-	if(data->map[data->p_y][data->p_x + 1] != '1')
+	if (data->map[data->p_y][data->p_x + 1] != '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_x++;
