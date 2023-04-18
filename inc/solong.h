@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 10:03:46 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:34:02 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ typedef struct s_data
 	int		max_x;
 	int		p_y;
 	int		p_x;
+	int		e_y;
+	int		e_x;
+	int		pwexit;
 	int		moves;
 	int		nb_col;
 	void	*mlx_ptr;

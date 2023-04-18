@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:09:44 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 10:06:29 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:49:09 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	*ft_imageload(t_data *data, char *path)/* https://github.com/S-LucasSerrano
 	imagep = mlx_xpm_file_to_image(data->mlx_ptr, path, &data->size, &data->size);
 	if (imagep == NULL) /* Check what happens if a image have a invalid path. had segfault*/
 	{
-		printf("%s", path);
+		printf("%s", path);// Remove printf
 		ft_exit("Couldn't convert a image.", EXIT_FAILURE, data);
 	}
 	return (imagep);
@@ -81,7 +81,7 @@ int	ft_keyhandler(int	keycode, t_data *data)
 
 	moves = 0;
 	if (keycode == XK_Escape)
-		ft_exit("Game finished by user", EXIT_SUCCESS, data);
+		ft_exit(NULL, EXIT_SUCCESS, data);
 	else if (keycode == XK_w)
 		ft_moveup(data);
 	else if (keycode == XK_s)
@@ -90,50 +90,110 @@ int	ft_keyhandler(int	keycode, t_data *data)
 		ft_moveleft(data);
 	else if (keycode == XK_d)
 		ft_moveright(data);
+	if(data->pwexit == 1 && (data->p_x != data->e_x || data->p_y != data->e_y))
+	{
+		printf("COORDS %i %i\n", data->e_x, data->e_y);
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->eimg, data->e_x * SIZE, data->e_y * SIZE);
+		data->pwexit = 0;
+	}
+	if(data->e_x == data->p_x && data->e_y == data->p_y && data->nb_col > 0)
+		data->pwexit = 1;
 	/* ADD OTHER KEYS */
 	return (0);
 }
 
 void	ft_moveup(t_data *data)
 {
-	if(data->map[data->p_y - 1][data->p_x] != '1')
+	if (data->map[data->p_y - 1][data->p_x] == '1')
+		return;
+	if (data->map[data->p_y - 1][data->p_x] == 'C')
+	{
+		data->nb_col--;
+		data->map[data->p_y - 1][data->p_x] = '0';
+		ft_printf("Collectbles %i\n", data->nb_col);
+	}
+	if (data->map[data->p_y - 1][data->p_x] == 'E' && data->nb_col == 0)
+	{
+		ft_printf("Game as finished! Congratulations\n");
+		ft_exit(NULL, EXIT_SUCCESS, data);
+	}
+	if (data->map[data->p_y - 1][data->p_x] != '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_y--;
-		printf("Moves: %i\n", ++data->moves);
+		ft_printf("Moves: %i\n", ++data->moves);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
 	}
 }
 
 void	ft_movedown(t_data *data)
 {
+	if (data->map[data->p_y + 1][data->p_x] == '1')
+		return;
+	if (data->map[data->p_y + 1][data->p_x] == 'C')
+	{
+		data->nb_col--;
+		data->map[data->p_y + 1][data->p_x] = '0';
+		ft_printf("Collectbles %i\n", data->nb_col);
+	}
+	if (data->map[data->p_y + 1][data->p_x] == 'E' && data->nb_col == 0)
+	{
+		ft_printf("Game as finished! Congratulations\n");
+		ft_exit(NULL, EXIT_SUCCESS, data);
+	}
 	if(data->map[data->p_y + 1][data->p_x] != '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_y++;
-		printf("Moves: %i\n", ++data->moves);
+		ft_printf("Moves: %i\n", ++data->moves);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
 	}
 }
 
 void	ft_moveleft(t_data *data)
 {
+	if (data->map[data->p_y][data->p_x - 1] == '1')
+		return;
+	if (data->map[data->p_y][data->p_x - 1] == 'C')
+	{
+		data->nb_col--;
+		data->map[data->p_y][data->p_x - 1] = '0';
+		ft_printf("Collectbles %i\n", data->nb_col);
+	}
+	if (data->map[data->p_y][data->p_x - 1] == 'E' && data->nb_col == 0)
+	{
+		ft_printf("Game as finished! Congratulations\n");
+		ft_exit(NULL, EXIT_SUCCESS, data);
+	}
 	if(data->map[data->p_y][data->p_x - 1] != '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_x--;
-		printf("Moves: %i\n", ++data->moves);
+		ft_printf("Moves: %i\n", ++data->moves);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
 	}
 }
 
 void	ft_moveright(t_data *data)
 {
+	if (data->map[data->p_y][data->p_x + 1] == '1')
+		return;
+	if (data->map[data->p_y][data->p_x + 1] == 'C')
+	{
+		data->nb_col--;
+		data->map[data->p_y][data->p_x + 1] = '0';
+		ft_printf("Collectbles %i\n", data->nb_col);
+	}
+	if (data->map[data->p_y][data->p_x + 1] == 'E' && data->nb_col == 0)
+	{
+		ft_printf("Game as finished! Congratulations\n");
+		ft_exit(NULL, EXIT_SUCCESS, data);
+	}
 	if(data->map[data->p_y][data->p_x + 1] != '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_x++;
-		printf("Moves: %i\n", ++data->moves);
+		ft_printf("Moves: %i\n", ++data->moves);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
 	}
 }

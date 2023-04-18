@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/17 11:00:54 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:32:58 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,11 @@ void	ft_checkmap(t_data *data)
 			charP++;
 		}
 		else if (data->map[y][x] == 'E')
+		{
+			data->e_y = y;
+			data->e_x = x;
 			charE++;
+		}
 		else if (data->map[y][x] == 'C')
 			data->nb_col++;
 		else if (data->map[y][x] == '1' || data->map[y][x] == '0')
