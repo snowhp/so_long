@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:09:44 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 09:59:16 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:06:29 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	ft_keyhandler(int	keycode, t_data *data)
 		ft_moveleft(data);
 	else if (keycode == XK_d)
 		ft_moveright(data);
-	printf("Moves: %i\n", moves++);
 	/* ADD OTHER KEYS */
 	return (0);
 }
@@ -101,6 +100,7 @@ void	ft_moveup(t_data *data)
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_y--;
+		printf("Moves: %i\n", ++data->moves);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
 	}
 }
@@ -111,6 +111,7 @@ void	ft_movedown(t_data *data)
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_y++;
+		printf("Moves: %i\n", ++data->moves);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
 	}
 }
@@ -121,6 +122,7 @@ void	ft_moveleft(t_data *data)
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_x--;
+		printf("Moves: %i\n", ++data->moves);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
 	}
 }
@@ -131,6 +133,7 @@ void	ft_moveright(t_data *data)
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
 		data->p_x++;
+		printf("Moves: %i\n", ++data->moves);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
 	}
 }
