@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:20 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/17 16:05:52 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:59:20 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		main(int	argc, char**	argv)
 			free(data.map[y]);
 			y++;
 		}
-		free(data.map[++y]);
+		free(data.map[y]);
 		free(data.map);
 	}
 	ft_loadmap(argv[1], &data);
