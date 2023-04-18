@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:09:44 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/17 16:34:50 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/18 09:59:16 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,40 +82,55 @@ int	ft_keyhandler(int	keycode, t_data *data)
 	moves = 0;
 	if (keycode == XK_Escape)
 		ft_exit("Game finished by user", EXIT_SUCCESS, data);
-	else if ( keycode == XK_w)
+	else if (keycode == XK_w)
 		ft_moveup(data);
-	else if ( keycode == XK_s)
+	else if (keycode == XK_s)
 		ft_movedown(data);
-	else if ( keycode == XK_a)
+	else if (keycode == XK_a)
 		ft_moveleft(data);
-	else if ( keycode == XK_d)
+	else if (keycode == XK_d)
 		ft_moveright(data);
-	printf("%i", moves++);
+	printf("Moves: %i\n", moves++);
 	/* ADD OTHER KEYS */
 	return (0);
 }
 
 void	ft_moveup(t_data *data)
 {
-	if(data->map[data->p_y + 1][data->p_x] != '1')
+	if(data->map[data->p_y - 1][data->p_x] != '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
-		data->p_y++;
-		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->cimg, data->p_x * SIZE, data->p_y * SIZE);
+		data->p_y--;
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
 	}
 }
 
 void	ft_movedown(t_data *data)
 {
-
+	if(data->map[data->p_y + 1][data->p_x] != '1')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
+		data->p_y++;
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
+	}
 }
 
 void	ft_moveleft(t_data *data)
 {
-
+	if(data->map[data->p_y][data->p_x - 1] != '1')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
+		data->p_x--;
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
+	}
 }
 
 void	ft_moveright(t_data *data)
 {
-
+	if(data->map[data->p_y][data->p_x + 1] != '1')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->fimg, data->p_x * SIZE, data->p_y * SIZE);
+		data->p_x++;
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->pimg, data->p_x * SIZE, data->p_y * SIZE);
+	}
 }
