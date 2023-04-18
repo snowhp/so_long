@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:20 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 10:59:20 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/18 21:03:21 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		main(int	argc, char**	argv)
 {
 	t_data	data;
+	int		y;
 
 	if (argc != 2)
 		ft_exit("Usage: ./so_long MAP_PATH", EXIT_FAILURE, &data);
@@ -22,9 +23,9 @@ int		main(int	argc, char**	argv)
 	ft_checkfile(argv[1], &data);
 	ft_loadmap(argv[1], &data);
 	ft_checkmap(&data);
+	y = 0;
 	if (data.map)
 	{
-		int y = 0;
 		while (data.map[y])
 		{
 			free(data.map[y]);
@@ -36,5 +37,4 @@ int		main(int	argc, char**	argv)
 	ft_loadmap(argv[1], &data);
 	ft_initgraph(&data);
 	ft_exit(NULL, EXIT_SUCCESS, &data);
-	/* Initialize struct*/
 }

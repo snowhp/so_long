@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 10:32:58 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/18 21:00:59 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_loadmap(char *str, t_data *data)
 	if (!data->map)
 		ft_exit("Failed to allocate memory", EXIT_FAILURE, data);
 	y = 0;
-	while (y < data->max_y)
+	while (1)
 	{
 		temp = get_next_line(data->fd);
 		if (!temp)
@@ -57,7 +57,6 @@ void	ft_loadmap(char *str, t_data *data)
 		data->map[y] = ft_strtrim(temp, "\n");/* Check for \0*/
 		free(temp);
 		y++;
-		//printf("%s\n", data->map[y-1]);// show the map
 	}
 	close(data->fd);
 	data->map[y] = 0;
@@ -140,32 +139,32 @@ void	ft_mapflood(t_data *data)
 	ne = 1;
 	maptemp = data->map;
 	ft_flood(data, maptemp, (data->p_y), data->p_x, &ne, &nc);
-	ft_printarray(maptemp, data);
+	ft_printarray(maptemp, data);//REMOVE
 	if (nc != 0 || ne != 0)
 		ft_exit("A valid path for the player doesn't exist", EXIT_FAILURE, data);
 }
 
-char	**ft_flood(t_data *data, char **maptemp, int p_y , int p_x, int *ne, int *nc)
+char	**ft_flood(t_data *data, char **m, int p_y , int p_x, int *ne, int *nc)
 {
-	if (maptemp[p_y][p_x] == '1')
-		return(maptemp);
-	else if (maptemp[p_y][p_x] == 'X')
+	if (m[p_y][p_x] == '1')
+		return (m);
+	else if (m[p_y][p_x] == 'X')
 	{
 	}
 	else
 	{
-		if (maptemp[p_y][p_x] == 'E')
+		if (m[p_y][p_x] == 'E')
 			(*ne)--;
-		else if (maptemp[p_y][p_x] == 'C')
+		else if (m[p_y][p_x] == 'C')
 			(*nc)--;
-		maptemp[p_y][p_x] = 'X';
-		ft_flood(data, maptemp, (p_y + 1) , p_x, ne, nc);
-		ft_flood(data, maptemp, (p_y - 1) , p_x, ne, nc);
-		ft_flood(data, maptemp, p_y, (p_x + 1), ne, nc);
-		ft_flood(data, maptemp, p_y, (p_x - 1), ne, nc);
-		return (maptemp);
+		m[p_y][p_x] = 'X';
+		ft_flood(data, m, (p_y + 1) , p_x, ne, nc);
+		ft_flood(data, m, (p_y - 1) , p_x, ne, nc);
+		ft_flood(data, m, p_y, (p_x + 1), ne, nc);
+		ft_flood(data, m, p_y, (p_x - 1), ne, nc);
+		return (m);
 	}
-	return (maptemp);
+	return (m);
 }
 
 void	ft_printarray(char **arr, t_data *data)
