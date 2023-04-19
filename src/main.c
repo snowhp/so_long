@@ -6,13 +6,13 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:20 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 21:03:21 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/19 11:52:43 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/solong.h"
 
-int		main(int	argc, char**	argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 	int		y;

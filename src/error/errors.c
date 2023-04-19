@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 09:31:38 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/19 11:27:44 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:27:40 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,11 @@ void	ft_destroyimg(t_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->pimg);
 	if (data->wimg)
 		mlx_destroy_image(data->mlx_ptr, data->wimg);
+}
+
+
+int		ft_esc(t_data *data)
+{
+	ft_exit(NULL, EXIT_SUCCESS, data);
+	return (0);
 }
