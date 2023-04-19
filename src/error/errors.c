@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 09:31:38 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 20:48:27 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/19 11:27:44 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_exit(char	*str, int i, t_data *data)
 	ft_destroyimg(data);
 	if (data->mlx_win)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-	if (data->mlx_win)
+	if (data->mlx_ptr)
 	{
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:09:44 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 10:52:05 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/19 11:37:27 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	ft_keyhandler(int	keycode, t_data *data)
 		ft_moveright(data);
 	if (data->pwexit == 1 && (data->p_x != data->e_x || data->p_y != data->e_y))
 	{
-		printf("COORDS %i %i\n", data->e_x, data->e_y);
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->eimg, data->e_x * SIZE, data->e_y * SIZE);
 		data->pwexit = 0;
 	}
@@ -107,7 +106,6 @@ void	ft_moveup(t_data *data)
 	{
 		data->nb_col--;
 		data->map[data->p_y - 1][data->p_x] = '0';
-		ft_printf("Collectbles %i\n", data->nb_col);
 	}
 	if (data->map[data->p_y - 1][data->p_x] == 'E' && data->nb_col == 0)
 	{
@@ -131,7 +129,6 @@ void	ft_movedown(t_data *data)
 	{
 		data->nb_col--;
 		data->map[data->p_y + 1][data->p_x] = '0';
-		ft_printf("Collectbles %i\n", data->nb_col);
 	}
 	if (data->map[data->p_y + 1][data->p_x] == 'E' && data->nb_col == 0)
 	{
@@ -154,8 +151,7 @@ void	ft_moveleft(t_data *data)
 	if (data->map[data->p_y][data->p_x - 1] == 'C')
 	{
 		data->nb_col--;
-		data->map[data->p_y][data->p_x - 1] = '0';
-		ft_printf("Collectbles %i\n", data->nb_col);
+		data->map[data->p_y][data->p_x - 1] = '0';;
 	}
 	if (data->map[data->p_y][data->p_x - 1] == 'E' && data->nb_col == 0)
 	{
@@ -179,7 +175,6 @@ void	ft_moveright(t_data *data)
 	{
 		data->nb_col--;
 		data->map[data->p_y][data->p_x + 1] = '0';
-		ft_printf("Collectbles %i\n", data->nb_col);
 	}
 	if (data->map[data->p_y][data->p_x + 1] == 'E' && data->nb_col == 0)
 	{

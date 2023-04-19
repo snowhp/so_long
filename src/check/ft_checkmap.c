@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/18 21:00:59 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/19 11:45:14 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_loadmap(char *str, t_data *data)
 		temp = get_next_line(data->fd);
 		if (!temp)
 			break ;
-		data->map[y] = ft_strtrim(temp, "\n");/* Check for \0*/
+		data->map[y] = ft_strtrim(temp, "\n");
 		free(temp);
 		y++;
 	}
@@ -70,7 +70,6 @@ void	ft_checkmap(t_data *data)
 	unsigned int	charE;
 	unsigned int	charP;
 
-	/* Line size*/
 	x = 0;
 	charE = 0;
 	charP = 0;
@@ -81,16 +80,16 @@ void	ft_checkmap(t_data *data)
 		if (size != ft_strlen(data->map[x]))
 			ft_exit("Map lines have different sizes", EXIT_FAILURE, data);
 	}
-	/* Borders */
 	x = 0;
 	while (data->map[0][x])
 	{
 		if (data->map[0][x++] != '1')
 			ft_exit("The first line is not a wall", EXIT_FAILURE, data);
 	}
+	if (data->max_x < 3 || data->max_y < 3)
+		ft_exit("Not enough width and height.", EXIT_FAILURE, data);
 	if (ft_memcmp(data->map[0], data->map[(data->max_y - 1)], sizeof(data->map[0] != 0)))
 		ft_exit("The last line is not a wall", EXIT_FAILURE, data);
-	/* Check content and forbiden things*/
 	y = 1;
 	x = 0;
 	while (data->map[y] && y < data->max_y)
@@ -139,7 +138,6 @@ void	ft_mapflood(t_data *data)
 	ne = 1;
 	maptemp = data->map;
 	ft_flood(data, maptemp, (data->p_y), data->p_x, &ne, &nc);
-	ft_printarray(maptemp, data);//REMOVE
 	if (nc != 0 || ne != 0)
 		ft_exit("A valid path for the player doesn't exist", EXIT_FAILURE, data);
 }
