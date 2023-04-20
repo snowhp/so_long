@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/19 15:27:29 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:00:40 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 typedef struct s_data
 {
 	int		fd;
-	char**	map;
-	int		max_y;/* For a 5 line file this value will be 5, and acessible by map[]*/
+	char	**map;
+	int		max_y;
 	int		max_x;
 	int		p_y;
 	int		p_x;
@@ -77,19 +77,19 @@ void	ft_exit(char	*str, int i, t_data *data);
 /**
  * @brief Initialize struct values.
  */
-void  ft_init_data(t_data *data);
+void	ft_init_data(t_data *data);
 void	ft_loadmap(char *str, t_data *data);
-void ft_checkmap(t_data *data);
+void	ft_checkmap(t_data *data);
 void	ft_mapflood(t_data *data);
-char **ft_flood(t_data *data, char **maptemp, int p_y , int p_x, int *ne, int *nc);
-void	ft_initgraph(t_data *data);
-void	*ft_imageload(t_data *data, char *path);
-int		ft_keyhandler(int	keycode, t_data *data);
-void	ft_loadscreen(t_data *data);
-void	ft_moveup(t_data *data);
-void	ft_movedown(t_data *data);
-void	ft_moveleft(t_data *data);
-void	ft_moveright(t_data *data);
+char	**ft_flood(t_data *data, char **maptemp, int p_y, int p_x, int *ne, int *nc);
+void	ft_initgraph(t_data *d);
+void	*ft_imageload(t_data *d, char *path);
+int		ft_keyhandler(int keycode, t_data *d);
+void	ft_loadscreen(t_data *d);
+void	ft_moveup(t_data *d);
+void	ft_movedown(t_data *d);
+void	ft_moveleft(t_data *d);
+void	ft_moveright(t_data *d);
 void	ft_destroyimg(t_data *data);
 int		ft_esc(t_data *data);
 
