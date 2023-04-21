@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:01:23 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/20 13:00:40 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/21 14:10:27 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 	int		pwexit;
 	int		moves;
 	int		nb_col;
+	int		charp;
 	void	*mlx_ptr;
 	void	*mlx_win;
 	void	*cimg;
@@ -79,9 +80,9 @@ void	ft_exit(char	*str, int i, t_data *data);
  */
 void	ft_init_data(t_data *data);
 void	ft_loadmap(char *str, t_data *data);
-void	ft_checkmap(t_data *data);
+void	ft_checkmap(t_data *d);
 void	ft_mapflood(t_data *data);
-char	**ft_flood(t_data *data, char **maptemp, int p_y, int p_x, int *ne, int *nc);
+char	**ft_flood(t_data *d, int p_y, int p_x, int *ne);
 void	ft_initgraph(t_data *d);
 void	*ft_imageload(t_data *d, char *path);
 int		ft_keyhandler(int keycode, t_data *d);
@@ -92,5 +93,8 @@ void	ft_moveleft(t_data *d);
 void	ft_moveright(t_data *d);
 void	ft_destroyimg(t_data *data);
 int		ft_esc(t_data *data);
+void	ft_putimage(t_data *d, int x, int y);
+void	ft_mapformat(t_data *d);
+void	ft_charver(t_data *d, int x, int y, int *chare);
 
 #endif

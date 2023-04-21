@@ -6,11 +6,13 @@
 #    By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 16:21:48 by tde-sous          #+#    #+#              #
-#    Updated: 2023/04/20 15:21:09 by tde-sous         ###   ########.fr        #
+#    Updated: 2023/04/21 12:42:19 by tde-sous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	src/check/ft_checkmap.c \
+		src/check/ft_mapflood.c \
+		src/check/ft_verifications.c \
 		src/error/errors.c \
 		src/init/ft_init_data.c \
 		src/init/ft_initgraph.c \

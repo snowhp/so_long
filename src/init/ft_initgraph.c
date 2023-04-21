@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:09:44 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/20 15:20:43 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:55:49 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,31 @@ void	ft_loadscreen(t_data *d)
 	{
 		while (d->map[y][x])
 		{
-			if (d->map[y][x] == 'C')
-				mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
-					d->cimg, x * SIZE, y * SIZE);
-			else if (d->map[y][x] == 'E')
-				mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
-					d->eimg, x * SIZE, y * SIZE);
-			else if (d->map[y][x] == '0')
-				mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
-					d->fimg, x * SIZE, y * SIZE);
-			else if (d->map[y][x] == 'P')
-				mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
-					d->pimg, x * SIZE, y * SIZE);
-			else if (d->map[y][x] == '1')
-				mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
-					d->wimg, x * SIZE, y * SIZE);
+			ft_putimage(d, x, y);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
+}
+
+void	ft_putimage(t_data *d, int x, int y)
+{
+	if (d->map[y][x] == 'C')
+		mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
+			d->cimg, x * SIZE, y * SIZE);
+	else if (d->map[y][x] == 'E')
+		mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
+			d->eimg, x * SIZE, y * SIZE);
+	else if (d->map[y][x] == '0')
+		mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
+			d->fimg, x * SIZE, y * SIZE);
+	else if (d->map[y][x] == 'P')
+		mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
+			d->pimg, x * SIZE, y * SIZE);
+	else if (d->map[y][x] == '1')
+		mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
+			d->wimg, x * SIZE, y * SIZE);
 }
 
 void	*ft_imageload(t_data *d, char *path)
@@ -79,7 +84,7 @@ void	*ft_imageload(t_data *d, char *path)
 	return (imagep);
 }
 
-int		ft_keyhandler(int keycode, t_data *d)
+int	ft_keyhandler(int keycode, t_data *d)
 {
 	if (keycode == XK_Escape)
 		ft_exit(NULL, EXIT_SUCCESS, d);
@@ -93,11 +98,11 @@ int		ft_keyhandler(int keycode, t_data *d)
 		ft_moveright(d);
 	if (d->pwexit == 1 && (d->p_x != d->e_x || d->p_y != d->e_y))
 	{
-		mlx_put_image_to_window(d->mlx_ptr, d->mlx_win, d->eimg, d->e_x * SIZE, d->e_y * SIZE);
+		mlx_put_image_to_window(d->mlx_ptr, d->mlx_win,
+			d->eimg, d->e_x * SIZE, d->e_y * SIZE);
 		d->pwexit = 0;
 	}
 	if (d->e_x == d->p_x && d->e_y == d->p_y && d->nb_col > 0)
 		d->pwexit = 1;
 	return (0);
 }
-
