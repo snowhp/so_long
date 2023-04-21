@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:09:44 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/21 11:55:49 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/21 14:14:30 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ int	ft_keyhandler(int keycode, t_data *d)
 {
 	if (keycode == XK_Escape)
 		ft_exit(NULL, EXIT_SUCCESS, d);
-	else if (keycode == XK_w)
+	else if (keycode == XK_w || keycode == XK_Up)
 		ft_moveup(d);
-	else if (keycode == XK_s)
+	else if (keycode == XK_s || keycode == XK_Down)
 		ft_movedown(d);
-	else if (keycode == XK_a)
+	else if (keycode == XK_a || keycode == XK_Left)
 		ft_moveleft(d);
-	else if (keycode == XK_d)
+	else if (keycode == XK_d || keycode == XK_Right)
 		ft_moveright(d);
 	if (d->pwexit == 1 && (d->p_x != d->e_x || d->p_y != d->e_y))
 	{
