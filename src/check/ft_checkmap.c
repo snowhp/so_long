@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:00 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/04/21 14:10:19 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/04/21 14:19:10 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_checkmap(t_data *d)
 	while (d->map[y] && y < d->max_y)
 	{
 		if ((x == 0 || x == d->max_x - 1) && d->map[y][x] != '1')
-			ft_exit("Missing Vertical Walls", EXIT_FAILURE, d);
+			ft_exit("Missing Walls", EXIT_FAILURE, d);
 		ft_charver(d, x, y, &chare);
 		if (d->map[y][++x] == 0)
 		{
